@@ -25,7 +25,7 @@ use gyro_doctor::report;
 )]
 struct Cli {
     /// The video to repair, or two or more chunks to merge and repair.
-    #[arg(value_name = "VIDEO", num_args = 1..)]
+    #[arg(value_name = "VIDEO", num_args = 1.., required = true)]
     videos: Vec<PathBuf>,
 
     /// The repaired video to write (default: the video's name with -repaired).
@@ -678,7 +678,9 @@ fn run(cli: Cli) -> Result<()> {
         mut repair_parameters,
         list,
     } = options(&cli)?;
-    let video = cli.videos[0].clone();
+    let Some(video) = cli.videos.first().cloned() else {
+        bail!("a video is required");
+    };
     let output = output_path(&video, cli.output.clone())?;
     let last_stage = if cli.decode_only {
         Stage::Decode
