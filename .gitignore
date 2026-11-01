@@ -1,0 +1,23 @@
+# Rust build output
+/core/target/
+
+# Android/Gradle build output
+/android/.gradle/
+/android/.kotlin/
+/android/build/
+/android/app/build/
+/android/local.properties
+/android/app/src/main/jniLibs/
+
+# Media and APKs
+*.mp4
+*.MP4
+*.mov
+*.MOV
+*.apk
+
+# Caches and editor files
+.gyro-doctor-cache/
+.idea/
+.vscode/
+*.swp
